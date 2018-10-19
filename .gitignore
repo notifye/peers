@@ -1,8 +1,12 @@
 .project
 .classpath
+.settings
+.sonarlint
+*.settings
 target/
 *~
 peers-demo/src/main/java/net/sourceforge/peers/demo/MyConfig.java
 \#*#
 bin/
 logs/
+/.metadata/
