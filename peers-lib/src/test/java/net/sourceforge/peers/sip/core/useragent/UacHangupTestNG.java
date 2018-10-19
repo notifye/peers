@@ -105,32 +105,32 @@ public class UacHangupTestNG {
             calleePickup = false;
         }
 
-        @Override
+        
         public void calleePickup(SipResponse sipResponse) {
             calleePickup = true;
         }
 
-        @Override
+        
         public void error(SipResponse sipResponse) { }
 
-        @Override
+        
         public void incomingCall(SipRequest sipRequest, SipResponse provResponse) {
             incomingCallInvoked = true;
         }
 
-        @Override
+        
         public void registerFailed(SipResponse sipResponse) { }
 
-        @Override
+        
         public void registerSuccessful(SipResponse sipResponse) { }
 
-        @Override
+        
         public void registering(SipRequest sipRequest) { }
 
-        @Override
+        
         public void remoteHangup(SipRequest sipRequest) { }
 
-        @Override
+        
         public void ringing(SipResponse sipResponse) { }
         
     }

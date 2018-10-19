@@ -204,7 +204,6 @@ public class MidDialogRequestManager extends RequestManager
     ///////////////////////////////////////
     // ServerTransactionUser methods
     ///////////////////////////////////////
-    @Override
     public void transactionFailure() {
         // TODO Auto-generated method stub
         
@@ -215,14 +214,13 @@ public class MidDialogRequestManager extends RequestManager
     // ClientTransactionUser methods
     ///////////////////////////////////////
     // callbacks employed for cancel responses (ignored)
-	@Override
 	public void transactionTimeout(ClientTransaction clientTransaction) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	@Override
+	
 	public void provResponseReceived(SipResponse sipResponse,
 			Transaction transaction) {
 		// TODO Auto-generated method stub
@@ -230,14 +228,14 @@ public class MidDialogRequestManager extends RequestManager
 	}
 
 
-	@Override
+	
 	public void errResponseReceived(SipResponse sipResponse) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	@Override
+	
 	public void successResponseReceived(SipResponse sipResponse,
 			Transaction transaction) {
 		// TODO Auto-generated method stub
@@ -245,7 +243,7 @@ public class MidDialogRequestManager extends RequestManager
 	}
 
 
-	@Override
+	
 	public void transactionTransportError() {
 		// TODO Auto-generated method stub
 		

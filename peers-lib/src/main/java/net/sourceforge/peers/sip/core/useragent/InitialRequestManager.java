@@ -303,7 +303,6 @@ public class InitialRequestManager extends RequestManager
     // ServerTransactionUser methods
     ///////////////////////////////////////////////////////////
 
-    @Override
     public void transactionFailure() {
         // TODO Auto-generated method stub
         

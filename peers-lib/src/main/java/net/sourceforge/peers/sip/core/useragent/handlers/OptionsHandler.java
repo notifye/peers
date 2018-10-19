@@ -73,7 +73,6 @@ public class OptionsHandler extends MethodHandler
         serverTransaction.sendReponse(sipResponse);
     }
 
-    @Override
     public void transactionFailure() {
         // TODO Auto-generated method stub
         

@@ -125,20 +125,20 @@ public class ByeHandler extends DialogMethodHandler
     ///////////////////////////////////////
     //ClientTransactionUser methods
     ///////////////////////////////////////
-	@Override
+	
 	public void transactionTimeout(ClientTransaction clientTransaction) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void provResponseReceived(SipResponse sipResponse,
 			Transaction transaction) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void errResponseReceived(SipResponse sipResponse) {
 		int statusCode = sipResponse.getStatusCode();
         if (statusCode == RFC3261.CODE_401_UNAUTHORIZED
@@ -159,7 +159,7 @@ public class ByeHandler extends DialogMethodHandler
         }
 	}
 
-	@Override
+	
 	public void successResponseReceived(SipResponse sipResponse,
 			Transaction transaction) {
 		Dialog dialog = dialogManager.getDialog(sipResponse);
@@ -171,7 +171,7 @@ public class ByeHandler extends DialogMethodHandler
         logger.debug("removed dialog " + dialog.getId());
 	}
 
-	@Override
+	
 	public void transactionTransportError() {
 		// TODO Auto-generated method stub
 		

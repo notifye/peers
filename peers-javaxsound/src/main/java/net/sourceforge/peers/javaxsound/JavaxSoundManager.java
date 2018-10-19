@@ -67,7 +67,7 @@ public class JavaxSoundManager extends AbstractSoundManager {
         sourceDataLineMutex = new Object();
     }
 
-    @Override
+    
     public void init() {
         logger.debug("openAndStartLines");
         if (mediaDebug) {
@@ -97,7 +97,7 @@ public class JavaxSoundManager extends AbstractSoundManager {
         AccessController.doPrivileged(
             new PrivilegedAction<Void>() {
 
-                @Override
+                
                 public Void run() {
                     try {
                         targetDataLine = (TargetDataLine) AudioSystem.getLine(targetInfo);
@@ -129,7 +129,7 @@ public class JavaxSoundManager extends AbstractSoundManager {
 
     }
 
-    @Override
+    
     public synchronized void close() {
         logger.debug("closeLines");
         if (microphoneOutput != null) {
@@ -151,7 +151,7 @@ public class JavaxSoundManager extends AbstractSoundManager {
         // AccessController.doPrivileged added for plugin compatibility
         AccessController.doPrivileged(new PrivilegedAction<Void>() {
 
-            @Override
+            
             public Void run() {
                 if (targetDataLine != null) {
                     targetDataLine.close();
@@ -170,7 +170,7 @@ public class JavaxSoundManager extends AbstractSoundManager {
         });
     }
 
-    @Override
+    
     public synchronized byte[] readData() {
         if (targetDataLine == null) {
             return null;
@@ -200,7 +200,7 @@ public class JavaxSoundManager extends AbstractSoundManager {
         return buffer;
     }
 
-    @Override
+    
     public int writeData(byte[] buffer, int offset, int length) {
         int numberOfBytesWritten;
         synchronized (sourceDataLineMutex) {

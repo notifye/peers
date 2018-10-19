@@ -98,32 +98,32 @@ public class CancelTestNG {
             invite487Received = false;
         }
 
-        @Override
+        
         public void calleePickup(SipResponse sipResponse) { }
 
-        @Override
+        
         public void error(SipResponse sipResponse) {
             invite487Received = true;
         }
 
-        @Override
+        
         public void incomingCall(SipRequest sipRequest, SipResponse provResponse) {
             incomingCallInvoked = true;
         }
 
-        @Override
+        
         public void registerFailed(SipResponse sipResponse) { }
 
-        @Override
+        
         public void registerSuccessful(SipResponse sipResponse) { }
 
-        @Override
+        
         public void registering(SipRequest sipRequest) { }
 
-        @Override
+        
         public void remoteHangup(SipRequest sipRequest) { }
 
-        @Override
+        
         public void ringing(SipResponse sipResponse) { }
         
     }

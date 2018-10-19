@@ -58,7 +58,6 @@ public class Keypad extends JPanel implements ActionListener {
         setMaximumSize(dimension);
     }
 
-    @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String command = actionEvent.getActionCommand();
         callFrame.keypadEvent(command.charAt(0));

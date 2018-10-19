@@ -119,7 +119,6 @@ public class RtpSession {
             AccessController.doPrivileged(
                 new PrivilegedAction<Void>() {
 
-                    @Override
                     public Void run() {
                         try {
                             datagramSocket.send(datagramPacket);
@@ -163,7 +162,7 @@ public class RtpSession {
         // AccessController.doPrivileged added for plugin compatibility
         AccessController.doPrivileged(
             new PrivilegedAction<Void>() {
-                @Override
+                
                 public Void run() {
                     datagramSocket.close();
                     return null;
@@ -175,7 +174,6 @@ public class RtpSession {
 
     class Receiver implements Runnable {
 
-        @Override
         public void run() {
             int receiveBufferSize;
             try {

@@ -173,20 +173,20 @@ public class CallFrame implements ActionListener, WindowListener {
 
     // action listener methods
 
-    @Override
+    
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
         Runnable runnable = null;
         if (HANGUP_ACTION_COMMAND.equals(actionCommand)) {
             runnable = new Runnable() {
-                @Override
+                
                 public void run() {
                     state.hangupClicked();
                 }
             };
         } else if (CLOSE_ACTION_COMMAND.equals(actionCommand)) {
             runnable = new Runnable() {
-                @Override
+                
                 public void run() {
                     state.closeClicked();
                 }
@@ -199,7 +199,7 @@ public class CallFrame implements ActionListener, WindowListener {
             };
         } else if (BUSY_HERE_ACTION_COMMAND.equals(actionCommand)) {
             runnable = new Runnable() {
-                @Override
+                
                 public void run() {
                     state.busyHereClicked();
                 }
@@ -212,32 +212,32 @@ public class CallFrame implements ActionListener, WindowListener {
 
     // window listener methods
 
-    @Override
+    
     public void windowActivated(WindowEvent e) {
     }
 
-    @Override
+    
     public void windowClosed(WindowEvent e) {
         state.hangupClicked();
     }
 
-    @Override
+    
     public void windowClosing(WindowEvent e) {
     }
 
-    @Override
+    
     public void windowDeactivated(WindowEvent e) {
     }
 
-    @Override
+    
     public void windowDeiconified(WindowEvent e) {
     }
 
-    @Override
+    
     public void windowIconified(WindowEvent e) {
     }
 
-    @Override
+    
     public void windowOpened(WindowEvent e) {
     }
 

@@ -154,7 +154,6 @@ public class InviteHandler extends DialogMethodHandler
             datagramSocket = AccessController.doPrivileged(
                 new PrivilegedAction<DatagramSocket>() {
 
-                    @Override
                     public DatagramSocket run() {
                         DatagramSocket datagramSocket = null;
                         int rtpPort = userAgent.getConfig().getRtpPort();

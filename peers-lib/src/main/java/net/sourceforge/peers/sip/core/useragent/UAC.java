@@ -106,7 +106,6 @@ public class UAC {
                 + userAgent.getDomain();
             MessageInterceptor messageInterceptor = new MessageInterceptor() {
                 
-                @Override
                 public void postProcess(SipMessage sipMessage) {
                     initialRequestManager.registerHandler.unregister();
                     SipHeaders sipHeaders = sipMessage.getSipHeaders();

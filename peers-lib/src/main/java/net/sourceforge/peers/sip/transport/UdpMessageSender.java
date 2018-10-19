@@ -44,7 +44,7 @@ public class UdpMessageSender extends MessageSender {
         this.datagramSocket = datagramSocket;
     }
 
-    @Override
+    
     public synchronized void sendMessage(SipMessage sipMessage) throws IOException {
         logger.debug("UdpMessageSender.sendMessage");
         if (sipMessage == null) {
@@ -58,7 +58,7 @@ public class UdpMessageSender extends MessageSender {
         logger.traceNetwork(new String(buf), direction.toString());
     }
 
-    @Override
+    
     public synchronized void sendBytes(byte[] bytes) throws IOException {
         logger.debug("UdpMessageSender.sendBytes");
         final DatagramPacket packet = new DatagramPacket(bytes, bytes.length,
@@ -69,7 +69,7 @@ public class UdpMessageSender extends MessageSender {
         AccessController.doPrivileged(
             new PrivilegedAction<Void>() {
 
-                @Override
+                
                 public Void run() {
                     try {
                         logger.debug(datagramSocket.getLocalAddress().toString());

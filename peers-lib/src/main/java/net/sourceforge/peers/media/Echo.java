@@ -48,7 +48,6 @@ public class Echo implements Runnable {
         isRunning = true;
     }
 
-    @Override
     public void run() {
         try {
             while (isRunning) {

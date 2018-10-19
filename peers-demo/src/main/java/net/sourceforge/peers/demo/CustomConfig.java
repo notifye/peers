@@ -11,7 +11,7 @@ public class CustomConfig implements Config {
 
     private InetAddress publicIpAddress;
 
-    @Override
+    
     public InetAddress getLocalInetAddress() {
         InetAddress inetAddress;
         try {
@@ -28,37 +28,37 @@ public class CustomConfig implements Config {
         return inetAddress;
     }
 
-    @Override
+    
     public InetAddress getPublicInetAddress() { return publicIpAddress; }
-    @Override public String getUserPart() { return "alice"; }
-    @Override public String getDomain() { return "atlanta.com"; }
-    @Override public String getPassword() { return "secret1234"; }
-    @Override
+     public String getUserPart() { return "alice"; }
+     public String getDomain() { return "atlanta.com"; }
+     public String getPassword() { return "secret1234"; }
+    
     public MediaMode getMediaMode() { return MediaMode.captureAndPlayback; }
 
-    @Override public String getAuthorizationUsername() { return getUserPart(); }
+     public String getAuthorizationUsername() { return getUserPart(); }
 
-    @Override
+    
     public void setPublicInetAddress(InetAddress inetAddress) {
         publicIpAddress = inetAddress;
     }
     
-    @Override public SipURI getOutboundProxy() { return null; }
-    @Override public int getSipPort() { return 0; }
-    @Override public boolean isMediaDebug() { return false; }
-    @Override public String getMediaFile() { return null; }
-    @Override public int getRtpPort() { return 0; }
-    @Override public void setLocalInetAddress(InetAddress inetAddress) { }
-    @Override public void setUserPart(String userPart) { }
-    @Override public void setDomain(String domain) { }
-    @Override public void setPassword(String password) { }
-    @Override public void setOutboundProxy(SipURI outboundProxy) { }
-    @Override public void setSipPort(int sipPort) { }
-    @Override public void setMediaMode(MediaMode mediaMode) { }
-    @Override public void setMediaDebug(boolean mediaDebug) { }
-    @Override public void setMediaFile(String mediaFile) { }
-    @Override public void setRtpPort(int rtpPort) { }
-    @Override public void save() { }
-    @Override public void setAuthorizationUsername(String authorizationUsername) { }
+     public SipURI getOutboundProxy() { return null; }
+     public int getSipPort() { return 0; }
+     public boolean isMediaDebug() { return false; }
+     public String getMediaFile() { return null; }
+     public int getRtpPort() { return 0; }
+     public void setLocalInetAddress(InetAddress inetAddress) { }
+     public void setUserPart(String userPart) { }
+     public void setDomain(String domain) { }
+     public void setPassword(String password) { }
+     public void setOutboundProxy(SipURI outboundProxy) { }
+     public void setSipPort(int sipPort) { }
+     public void setMediaMode(MediaMode mediaMode) { }
+     public void setMediaDebug(boolean mediaDebug) { }
+     public void setMediaFile(String mediaFile) { }
+     public void setRtpPort(int rtpPort) { }
+     public void save() { }
+     public void setAuthorizationUsername(String authorizationUsername) { }
     
 }

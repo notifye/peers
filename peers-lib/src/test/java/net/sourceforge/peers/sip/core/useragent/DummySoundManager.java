@@ -22,20 +22,20 @@ import net.sourceforge.peers.media.AbstractSoundManager;
 
 public class DummySoundManager extends AbstractSoundManager {
 
-    @Override
+    
     public byte[] readData() {
         return null;
     }
 
-    @Override
+    
     public void init() {
     }
 
-    @Override
+    
     public void close() {
     }
 
-    @Override
+    
     public int writeData(byte[] buffer, int offset, int length) {
         return 0;
     }

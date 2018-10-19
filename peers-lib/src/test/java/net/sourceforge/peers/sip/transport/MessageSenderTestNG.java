@@ -40,99 +40,94 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class MessageSenderTestNG {
-    
-    private TransportManager transportManager;
-    
-    private String message;
-    private String expectedMessage;
-    private volatile boolean messageReceived = false;
-    private volatile int port;
 
-    @BeforeClass
-    protected void init() throws UnknownHostException, SocketException {
-        //TODO interface between transport manager and transaction manager
-        DatagramSocket datagramSocket = new DatagramSocket();
-        final int localPort = datagramSocket.getLocalPort();
-        Config config = new JavaConfig();
-        config.setSipPort(localPort);
-        config.setLocalInetAddress(InetAddress.getLocalHost());
-        SipServerTransportUser sipServerTransportUser =
-            new SipServerTransportUser() {
-            @Override public void messageReceived(SipMessage sipMessage) {}
-        };
-        Logger logger = new FileLogger(null);
-        transportManager = new TransportManager(
-                new TransactionManager(logger),
-                config, logger);
-        transportManager.setSipServerTransportUser(sipServerTransportUser);
-        transportManager.setSipPort(new Random().nextInt(65535));
-    }
-    
-    @Test(groups = "listen")
-    public void listen() throws InterruptedException {
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                DatagramPacket datagramPacket = new DatagramPacket(
-                        new byte[2048], 2048);
-                DatagramSocket datagramSocket;
-                try {
-                    datagramSocket = new DatagramSocket();
-                    port = datagramSocket.getLocalPort();
-                    while (message == null || "".equals(message.trim())) {
-                        datagramSocket.receive(datagramPacket);
-                        byte[] receivedBytes = datagramPacket.getData();
-                        int nbReceivedBytes = datagramPacket.getLength();
-                        byte[] trimmedBytes = new byte[nbReceivedBytes];
-                        System.arraycopy(receivedBytes, 0,
-                                trimmedBytes, 0, nbReceivedBytes);
-                        message = new String(trimmedBytes);
-                    }
-                    messageReceived = true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-        while (port == 0) {
-            Thread.sleep(50);
-        }
-    }
-    
-    @Test(dependsOnGroups = {"listen"}, groups = "send")
-    public void sendMessage() throws IOException, SipParserException {
-        //TODO make parser throw sipparserexception with explicit message if first
-        //line is incorrect, or if there is no via (no nullpointer exception!!)
-        String testMessage = "MESSAGE sip:bob@bilox.com SIP/2.0\r\n" +
-            "Via: \r\n" +
-            "\r\n";
-        SipRequest sipRequest = (SipRequest)parse(testMessage);
-        assert sipRequest.getBody() == null;
-        InetAddress inetAddress = InetAddress.getLocalHost();
-        assert transportManager != null;
-        MessageSender messageSender = transportManager.createClientTransport(
-                sipRequest, inetAddress, port, "UDP");
-        messageSender.sendMessage(sipRequest);
-        expectedMessage = sipRequest.toString();
-    }
-    
-    @Test(timeOut = 10000, dependsOnGroups = {"send"})
-    public void checkAnswer() throws InterruptedException {
-        while (!messageReceived) {
-            Thread.sleep(50);
-        }
-        assert message != null : "message is null";
-        assert expectedMessage != null : "expected message is null";
-        assert message.length() == expectedMessage.length() : "message " +
-                "differs from expected message length";
-        assert message.equals(expectedMessage) : "message != expected message";
-    }
-    
-    private SipMessage parse(String message) throws IOException, SipParserException {
-        ByteArrayInputStream bais = new ByteArrayInputStream(message.getBytes());
-        SipParser sipParser = new SipParser();
-        SipMessage sipMessage = sipParser.parse(bais);
-        return sipMessage;
-    }
-    
+	private TransportManager transportManager;
+
+	private String message;
+	private String expectedMessage;
+	private volatile boolean messageReceived = false;
+	private volatile int port;
+
+	@BeforeClass
+	protected void init() throws UnknownHostException, SocketException {
+		// TODO interface between transport manager and transaction manager
+		DatagramSocket datagramSocket = new DatagramSocket();
+		
+		final int localPort = datagramSocket.getLocalPort();
+		Config config = new JavaConfig();
+		config.setSipPort(localPort);
+		config.setLocalInetAddress(InetAddress.getLocalHost());
+		
+		SipServerTransportUser sipServerTransportUser = new SipServerTransportUser() {
+			public void messageReceived(SipMessage sipMessage) {
+			}
+		};
+		
+		Logger logger = new FileLogger(null);
+		transportManager = new TransportManager(new TransactionManager(logger), config, logger);
+		transportManager.setSipServerTransportUser(sipServerTransportUser);
+		transportManager.setSipPort(new Random().nextInt(65535));
+	}
+
+	@Test(groups = "listen")
+	public void listen() throws InterruptedException {
+		Thread thread = new Thread(new Runnable() {
+			public void run() {
+				DatagramPacket datagramPacket = new DatagramPacket(new byte[2048], 2048);
+				DatagramSocket datagramSocket;
+				try {
+					datagramSocket = new DatagramSocket();
+					port = datagramSocket.getLocalPort();
+					while (message == null || "".equals(message.trim())) {
+						datagramSocket.receive(datagramPacket);
+						byte[] receivedBytes = datagramPacket.getData();
+						int nbReceivedBytes = datagramPacket.getLength();
+						byte[] trimmedBytes = new byte[nbReceivedBytes];
+						System.arraycopy(receivedBytes, 0, trimmedBytes, 0, nbReceivedBytes);
+						message = new String(trimmedBytes);
+					}
+					messageReceived = true;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+		while (port == 0) {
+			Thread.sleep(50);
+		}
+	}
+
+	@Test(dependsOnGroups = { "listen" }, groups = "send")
+	public void sendMessage() throws IOException, SipParserException {
+		// TODO make parser throw sipparserexception with explicit message if first
+		// line is incorrect, or if there is no via (no nullpointer exception!!)
+		String testMessage = "MESSAGE sip:bob@bilox.com SIP/2.0\r\n" + "Via: \r\n" + "\r\n";
+		SipRequest sipRequest = (SipRequest) parse(testMessage);
+		assert sipRequest.getBody() == null;
+		InetAddress inetAddress = InetAddress.getLocalHost();
+		assert transportManager != null;
+		MessageSender messageSender = transportManager.createClientTransport(sipRequest, inetAddress, port, "UDP");
+		messageSender.sendMessage(sipRequest);
+		expectedMessage = sipRequest.toString();
+	}
+
+	@Test(timeOut = 10000, dependsOnGroups = { "send" })
+	public void checkAnswer() throws InterruptedException {
+		while (!messageReceived) {
+			Thread.sleep(50);
+		}
+		assert message != null : "message is null";
+		assert expectedMessage != null : "expected message is null";
+		assert message.length() == expectedMessage.length() : "message " + "differs from expected message length";
+		assert message.equals(expectedMessage) : "message != expected message";
+	}
+
+	private SipMessage parse(String message) throws IOException, SipParserException {
+		ByteArrayInputStream bais = new ByteArrayInputStream(message.getBytes());
+		SipParser sipParser = new SipParser();
+		SipMessage sipMessage = sipParser.parse(bais);
+		return sipMessage;
+	}
+
 }

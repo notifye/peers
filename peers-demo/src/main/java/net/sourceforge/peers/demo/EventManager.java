@@ -40,7 +40,7 @@ public class EventManager implements SipListener {
     // commands methods
     public void call(final String callee) {
         new Thread() {
-            @Override
+            
             public void run() {
                 try {
                     sipRequest = userAgent.invite(callee, null);
@@ -53,7 +53,7 @@ public class EventManager implements SipListener {
     
     public void hangup() {
         new Thread() {
-            @Override
+            
             public void run() {
                 userAgent.terminate(sipRequest);
             }
@@ -63,28 +63,28 @@ public class EventManager implements SipListener {
     
     // SipListener methods
     
-    @Override
+    
     public void registering(SipRequest sipRequest) { }
 
-    @Override
+    
     public void registerSuccessful(SipResponse sipResponse) { }
 
-    @Override
+    
     public void registerFailed(SipResponse sipResponse) { }
 
-    @Override
+    
     public void incomingCall(SipRequest sipRequest, SipResponse provResponse) { }
 
-    @Override
+    
     public void remoteHangup(SipRequest sipRequest) { }
 
-    @Override
+    
     public void ringing(SipResponse sipResponse) { }
 
-    @Override
+    
     public void calleePickup(SipResponse sipResponse) { }
 
-    @Override
+    
     public void error(SipResponse sipResponse) { }
 
     public static void main(String[] args) {
